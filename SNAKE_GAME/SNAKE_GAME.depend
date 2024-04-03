@@ -1,9 +1,8 @@
 # depslib dependency file v1.0
-1710440319 source:d:\snake_game\snake_game\main.cpp
+1712117811 source:d:\snake_game\snake_game\main.cpp
 	<SDL.h>
 	<SDL_image.h>
-	<stdio.h>
-	<string>
+	<bits/stdc++.h>
 
 1706832967 c:\users\pc\downloads\sdl2-devel-2.30.0-mingw\sdl2-2.30.0\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"

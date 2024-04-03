@@ -97,10 +97,9 @@ void update(vector<Object>& snake, Object& food, int& DIR, bool& GameOver) {
     }
 }
 
-void draw(SDL_Renderer *renderer, SDL_Texture* backgroundTexture, SDL_Texture* gameOverTexture, vector<Object> snake, Object food, bool GameOver) {
+void drawSnake(SDL_Renderer *renderer, vector<Object> snake) {
 
-    SDL_Rect rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
-    SDL_RenderCopy(renderer, backgroundTexture, NULL, &rect);
+    SDL_Rect rect;
 
     for (int i = snake.size() - 1; i >= 0; i--) {
 
@@ -115,34 +114,40 @@ void draw(SDL_Renderer *renderer, SDL_Texture* backgroundTexture, SDL_Texture* g
 
         rect = {segment.x, segment.y, CELL_SIZE, CELL_SIZE};
 
-        if(segment.x==snake.front().x && segment.y==snake.front().y){
+        if(i == 0){
             rect = {segment.x-5, segment.y-5, CELL_SIZE+10, CELL_SIZE+10};
         }
 
         SDL_RenderFillRect(renderer, &rect);
     }
+}
 
-    SDL_SetRenderDrawColor(renderer, 200, 0, 50, 0);
-    rect = {food.x, food.y, CELL_SIZE, CELL_SIZE};
-    SDL_RenderFillRect(renderer, &rect);
+void drawBackground(SDL_Renderer *renderer, SDL_Texture* backgroundTexture){
+    SDL_Rect rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+    SDL_RenderCopy(renderer, backgroundTexture, NULL, &rect);
+}
 
-    if(GameOver){
-        rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
-        SDL_RenderCopy(renderer, gameOverTexture, NULL, &rect);
-    }
+void drawGameOver(SDL_Renderer *renderer, SDL_Texture* gameOverTexture){
+    SDL_Rect rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+    SDL_RenderCopy(renderer, gameOverTexture, NULL, &rect);
+}
+
+void drawFood(SDL_Renderer *renderer, SDL_Texture* foodTexture, Object food){
+    SDL_Rect rect = {food.x-5, food.y-5, CELL_SIZE+10, CELL_SIZE+10};
+    SDL_RenderCopy(renderer, foodTexture, NULL, &rect);
 }
 
 SDL_Texture* loadTexture(SDL_Renderer* renderer, const string& imagePath) {
 
     SDL_Surface* loadedSurface = IMG_Load(imagePath.c_str());
     if (loadedSurface == NULL) {
-        cerr << "Unable to load image " << imagePath << "! SDL_image Error: " << IMG_GetError() << endl;
+        cerr << "Unable to load image " << imagePath << "! SDL_image Error: " << IMG_GetError() << '\n';
         return NULL;
     }
 
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
     if (texture == NULL) {
-        cerr << "Unable to create texture from " << imagePath << "! SDL Error: " << SDL_GetError() << endl;
+        cerr << "Unable to create texture from " << imagePath << "! SDL Error: " << SDL_GetError() << '\n';
         return NULL;
     }
 
@@ -152,30 +157,32 @@ SDL_Texture* loadTexture(SDL_Renderer* renderer, const string& imagePath) {
 }
 
 int main(int argc, char *argv[]) {
+    srand(time(NULL));
+
     SDL_Window *window = NULL;
     SDL_Renderer *renderer = NULL;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << endl;
+        cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << '\n';
         return 1;
     }
 
     window = SDL_CreateWindow("Snake Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                               SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (window == NULL) {
-        cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << endl;
+        cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << '\n';
         return 1;
     }
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (renderer == NULL) {
-        cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << endl;
+        cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << '\n';
         return 1;
     }
 
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
-        cerr << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << endl;
+        cerr << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << '\n';
         return 1;
     }
 
@@ -189,7 +196,10 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    srand(time(NULL));
+    SDL_Texture* foodTexture = loadTexture(renderer, "Food.png");
+    if (foodTexture == NULL) {
+        return 1;
+    }
 
     vector<Object> snake;
     snake.push_back({SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2});
@@ -235,7 +245,13 @@ int main(int argc, char *argv[]) {
             update(snake, food, DIR, GameOver);
         }
 
-        draw(renderer, backgroundTexture, gameOverTexture, snake, food, GameOver);
+        drawBackground(renderer, backgroundTexture);
+        drawSnake(renderer, snake);
+        drawFood(renderer, foodTexture, food);
+
+        if(GameOver){
+            drawGameOver(renderer, gameOverTexture);
+        }
 
         SDL_RenderPresent(renderer);
 
