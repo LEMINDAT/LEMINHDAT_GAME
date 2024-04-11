@@ -1,8 +1,6 @@
 # depslib dependency file v1.0
-1712117811 source:d:\snake_game\snake_game\main.cpp
-	<SDL.h>
-	<SDL_image.h>
-	<bits/stdc++.h>
+1712780388 source:d:\snake_game\snake_game\main.cpp
+	"CommonFunction.h"
 
 1706832967 c:\users\pc\downloads\sdl2-devel-2.30.0-mingw\sdl2-2.30.0\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -402,4 +400,12 @@
 	"SDL_version.h"
 	"begin_code.h"
 	"close_code.h"
+
+1712780353 source:d:\snake_game\snake_game\commonfunction.cpp
+	"CommonFunction.h"
+
+1712780347 d:\snake_game\snake_game\commonfunction.h
+	<SDL.h>
+	<SDL_image.h>
+	<bits/stdc++.h>
 

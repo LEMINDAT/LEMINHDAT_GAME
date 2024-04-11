@@ -39,6 +39,8 @@
 			<Add directory="C:/Users/pc/Downloads/SDL2-devel-2.30.0-mingw/SDL2-2.30.0/x86_64-w64-mingw32/lib" />
 			<Add directory="C:/Users/pc/Downloads/SDL2_image-devel-2.8.2-mingw/SDL2_image-2.8.2/x86_64-w64-mingw32/lib" />
 		</Linker>
+		<Unit filename="CommonFunction.cpp" />
+		<Unit filename="CommonFunction.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
