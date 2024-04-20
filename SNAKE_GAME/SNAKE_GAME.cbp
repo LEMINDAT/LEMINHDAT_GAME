@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="./" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -39,8 +41,12 @@
 			<Add directory="C:/Users/pc/Downloads/SDL2-devel-2.30.0-mingw/SDL2-2.30.0/x86_64-w64-mingw32/lib" />
 			<Add directory="C:/Users/pc/Downloads/SDL2_image-devel-2.8.2-mingw/SDL2_image-2.8.2/x86_64-w64-mingw32/lib" />
 		</Linker>
+		<Unit filename="BaseObject.cpp" />
+		<Unit filename="BaseObject.h" />
 		<Unit filename="CommonFunction.cpp" />
 		<Unit filename="CommonFunction.h" />
+		<Unit filename="Snake.cpp" />
+		<Unit filename="Snake.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

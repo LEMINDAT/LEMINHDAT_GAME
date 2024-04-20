@@ -4,13 +4,13 @@ SDL_Texture* loadTexture(SDL_Renderer* renderer, const string& imagePath) {
 
     SDL_Surface* loadedSurface = IMG_Load(imagePath.c_str());
     if (loadedSurface == NULL) {
-        SDL_Log("Unable to load image %s\n", IMG_GetError());
+        SDL_Log("Unable to load image: %s\n", IMG_GetError());
         return NULL;
     }
 
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
     if (texture == NULL) {
-        SDL_Log("Unable to create texture from %s\n", SDL_GetError());
+        SDL_Log("Unable to create texture from: %s\n", SDL_GetError());
         return NULL;
     }
 
