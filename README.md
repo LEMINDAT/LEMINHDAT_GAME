@@ -1,2 +1,2 @@
 "# SNAKE GAME" 
-## Cách sử dụng
+Cách sử dụng
