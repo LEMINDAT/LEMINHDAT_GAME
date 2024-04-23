@@ -3,16 +3,10 @@
 Snake::Snake()
 {
     //ctor
-}
 
-Snake::~Snake()
-{
-    //dtor
-}
-
-void Snake::Init(){
     BaseObject initHead, initTail;
     initHead.RandomGenerate();
+    initHead.setTYPE(NORMAL);
     initTail = initHead;
     initTail.Move(CELL_SIZE*dx[initHead.getDIR()], CELL_SIZE*dy[initHead.getDIR()]);
 
@@ -28,6 +22,11 @@ void Snake::Init(){
     for(int i = 0; i < 4; i++){
         Tail[i] = NULL;
     }
+}
+
+Snake::~Snake()
+{
+    //dtor
 }
 
 bool Snake::LoadImages(SDL_Renderer* renderer){
@@ -90,35 +89,40 @@ bool Snake::LoadImages(SDL_Renderer* renderer){
 
 bool Snake::CollideWithBody()
 {
-    for (int i = 1; i+1 < segment.size(); ++i) {
-        if (segment.front() == segment[i]) {
+    for (int i = 1; i < segment.size(); ++i) {
+        if (segment.front().SamePosition(segment[i])) {
             return true;
         }
     }
     return false;
 }
 
-bool Snake::CollideWithObject(BaseObject Object)
+bool Snake::CollideWith(BaseObject object)
 {
-     for (int i = 1; i+1 < segment.size(); ++i) {
-        if (segment[i] == Object) {
-            return true;
-        }
+    int DIR1 = min(object.getDIR(), segment[1].getDIR()),
+        DIR2 = max(object.getDIR(), segment[1].getDIR());
+    return segment.front().SamePosition(object) ||
+    (object.SamePosition(segment[1]) && ((DIR1 == UP && DIR2 == DOWN) ||
+                              (DIR1 == LEFT && DIR2 == RIGHT)));
+}
+
+bool Snake::OverlapWith(BaseObject object){
+    for(BaseObject cur: segment){
+        if(cur.SamePosition(object)) return true;
     }
     return false;
 }
 
-void Snake::NextStep(){
+bool Snake::OverlapWith(Prey preys){
+    for(BaseObject object: preys.object){
+        if(OverlapWith(object)) return true;
+    }
+    return false;
+}
+
+void Snake::Update(){
     BaseObject newHead = segment.front();
-    newHead.Move(CELL_SIZE * dx[newHead.getDIR()],
-                         CELL_SIZE * dy[newHead.getDIR()]);
-
-    //go through the edge
-    if(newHead.getX() < 0) newHead.Move(SCREEN_WIDTH, 0);
-    else if(newHead.getX() == SCREEN_WIDTH) newHead.setX(0);
-
-    if(newHead.getY() < 0) newHead.Move(0, SCREEN_HEIGHT);
-    else if(newHead.getY() == SCREEN_HEIGHT) newHead.setY(0);
+    newHead.Move(CELL_SIZE ,CELL_SIZE);
 
     segment.push_front(newHead);
 }
@@ -127,7 +131,7 @@ void Snake::Popback(){
     segment.pop_back();
 }
 
-void Snake::Draw(SDL_Renderer* renderer, BaseObject& food){
+void Snake::Draw(SDL_Renderer* renderer, Prey preys){
 
     for (int i = 1; i + 1 < segment.size(); i++) {
 
@@ -146,17 +150,27 @@ void Snake::Draw(SDL_Renderer* renderer, BaseObject& food){
             id = UD_Dir * 2 + LR_Dir;
         }
 
-        applyImage(renderer, Body[id], segment[i].getX(), segment[i].getY(), CELL_SIZE, CELL_SIZE);
+        applyImage(renderer, Body[id], segment[i].getX(), segment[i].getY(), CELL_SIZE, CELL_SIZE, 0, 0);
     }
     //draw tail
-    applyImage(renderer, Tail[segment.back().getDIR()], segment.back().getX(), segment.back().getY(), CELL_SIZE, CELL_SIZE);
+    applyImage(renderer, Tail[segment.back().getDIR()], segment.back().getX(), segment.back().getY(), CELL_SIZE, CELL_SIZE, 0, 0);
 
     //draw head
-    int manhattanDis = (abs(segment.front().getX() - food.getX()) + abs(segment.front() .getY() - food.getY())) / CELL_SIZE;
     int id = segment.front().getDIR()*3;
+
+    int manhattanDis = SCREEN_HEIGHT + SCREEN_WIDTH;
+    for(int i = 0; i < preys.MaxPrey; i++){
+        if(preys.object[i].getTYPE() != NORMAL){
+            manhattanDis = min(manhattanDis, segment.front().ManhattanDist(preys.object[i]));
+        }
+    }
+    manhattanDis /= CELL_SIZE;
     if(manhattanDis == 0 || manhattanDis == 2) id++;
     if(manhattanDis == 1) id += 2;
-    applyImage(renderer, Head[id], segment.front().getX()-5, segment.front().getY()-5, CELL_SIZE+10, CELL_SIZE+10);
+
+    int cWIDTH = (id < 6 ? 6 : 16);
+    int cHEIGHT = (id < 6 ? 16 : 6);
+    applyImage(renderer, Head[id], segment.front().getX() - cWIDTH/2, segment.front().getY() - cHEIGHT/2, CELL_SIZE + cWIDTH, CELL_SIZE + cHEIGHT, 0, 0);
 }
 
 void Snake::HandleEvent(SDL_Event event){
@@ -164,23 +178,23 @@ void Snake::HandleEvent(SDL_Event event){
     int newDIR = DIR;
     if(event.type == SDL_KEYDOWN){
         switch(event.key.keysym.sym){
-            case SDLK_UP:
-            if(DIR != DIR_DOWN) newDIR = DIR_UP;
+            case SDLK_UP: newDIR = UP;
             break;
 
-            case SDLK_DOWN:
-            if(DIR != DIR_UP) newDIR = DIR_DOWN;
+            case SDLK_DOWN: newDIR = DOWN;
             break;
 
-            case SDLK_LEFT:
-            if(DIR != DIR_RIGHT) newDIR = DIR_LEFT;
+            case SDLK_LEFT: newDIR = LEFT;
             break;
 
-            case SDLK_RIGHT:
-            if(DIR != DIR_LEFT) newDIR = DIR_RIGHT;
+            case SDLK_RIGHT: newDIR = RIGHT;
             break;
 
         }
+    }
+
+    if(newDIR + DIR == UP + DOWN || newDIR + DIR == LEFT + RIGHT){
+        newDIR = DIR;
     }
 
     segment.front().setDIR(newDIR);

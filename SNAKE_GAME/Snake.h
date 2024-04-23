@@ -3,6 +3,7 @@
 
 #include "CommonFunction.h"
 #include "BaseObject.h"
+#include "Prey.h"
 
 class Snake
 {
@@ -10,13 +11,14 @@ class Snake
         Snake();
         virtual ~Snake();
 
-        void Init();
         bool LoadImages(SDL_Renderer* renderer);
         bool CollideWithBody();
-        bool CollideWithObject(BaseObject object);
-        void NextStep();
+        bool CollideWith(BaseObject object);
+        bool OverlapWith(BaseObject object);
+        bool OverlapWith(Prey preys);
+        void Update();
         void Popback();
-        void Draw(SDL_Renderer* renderer, BaseObject& food);
+        void Draw(SDL_Renderer* renderer, Prey preys);
         void HandleEvent(SDL_Event event);
     protected:
 

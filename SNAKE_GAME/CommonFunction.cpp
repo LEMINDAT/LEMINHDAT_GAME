@@ -19,13 +19,17 @@ SDL_Texture* loadTexture(SDL_Renderer* renderer, const string& imagePath) {
     return texture;
 }
 
-void applyImage(SDL_Renderer* renderer, SDL_Texture* img, int Xpos, int Ypos, int WIDTH, int HEIGHT){
+void applyImage(SDL_Renderer* renderer, SDL_Texture* img, int Xpos, int Ypos, int WIDTH, int HEIGHT, double angle, int flip){
     SDL_Rect rect = {Xpos, Ypos, WIDTH, HEIGHT};
-    SDL_RenderCopy(renderer, img, NULL, &rect);
+    SDL_RendererFlip flipState = (flip == NONE ? SDL_FLIP_NONE
+                                  : (flip == HORIZONTAL ? SDL_FLIP_HORIZONTAL : SDL_FLIP_VERTICAL));
+    SDL_RenderCopyEx(renderer, img, NULL, &rect, angle, NULL, flipState);
 }
 
 void CleanUp(){
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    IMG_Quit();
+    SDL_Quit();
 }
 

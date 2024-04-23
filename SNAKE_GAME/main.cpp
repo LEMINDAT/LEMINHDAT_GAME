@@ -2,30 +2,37 @@
 #include "BaseObject.h"
 #include "Snake.h"
 
+void update(Snake& snake, Prey& preys, SDL_Texture* BloodTexture, bool& GameOver) {
 
-BaseObject generateFood(Snake snake) {
-    BaseObject food;
+    snake.Update();
+    preys.Update();
 
-    do{
-        food.RandomGenerate();
-    }while(snake.CollideWithObject(food));
-
-    return food;
-}
-
-void update(Snake& snake, BaseObject& food, bool& GameOver) {
-
-    if (snake.CollideWithObject(food)) {
-        food = generateFood(snake);
+    bool Collision = false;
+    for(int i = 0; i < preys.MaxPrey; i++){
+        BaseObject& object = preys.object[i];
+        if(object.getTYPE() == NORMAL){
+            continue;
+        }
+        if(snake.CollideWith(object)){
+            Collision = true;
+            if(object.getTYPE() == RAT){
+                int cWITDH = 60, cHEIGHT = 60;
+                applyImage(renderer, BloodTexture,
+                           object.getX() - cWITDH/2, object.getY() - cHEIGHT/2,
+                           CELL_SIZE + cWITDH, CELL_SIZE + cHEIGHT, 0, NONE);
+            }
+            do{
+                preys.RandomGenerate(i);
+            }while(snake.OverlapWith(object));
+            break;
+        }
     }
 
-    snake.NextStep();
-
-    if (!snake.CollideWithObject(food)) {
+    if(!Collision){
         snake.Popback();
     }
 
-    if (snake.CollideWithBody()) {
+    if(snake.CollideWithBody()) {
         GameOver = true;
     }
 }
@@ -78,22 +85,22 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    SDL_Texture* foodTexture = loadTexture(renderer, "Image/Food.png");
-    if(foodTexture == NULL){
+    SDL_Texture* BloodTexture = loadTexture(renderer, "Image/Blood.png");
+    if(BloodTexture == NULL){
         return 1;
     }
 
     Snake snake;
-
-    snake.Init();
+    Prey preys;
 
     if(!snake.LoadImages(renderer)){
         return 1;
     }
+    if(!preys.LoadImages(renderer)){
+        return 1;
+    }
 
-    BaseObject food = generateFood(snake);
     bool GameOver = false;
-
     bool quit = false;
 
     while (!quit) {
@@ -107,27 +114,26 @@ int main(int argc, char *argv[]) {
             }
         }
 
-//        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
+        applyImage(renderer, backgroundTexture, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
 
         if(!GameOver){
-            update(snake, food, GameOver);
+            update(snake, preys, BloodTexture, GameOver);
         }
 
-        applyImage(renderer, backgroundTexture, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-        snake.Draw(renderer, food);
-        applyImage(renderer, foodTexture, food.getX()-5, food.getY()-5, CELL_SIZE+10, CELL_SIZE+10);
+        snake.Draw(renderer, preys);
+        preys.Draw(renderer);
 
         if(GameOver){
-            applyImage(renderer, gameOverTexture, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            applyImage(renderer, gameOverTexture, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
         }
 
         SDL_RenderPresent(renderer);
 
         SDL_Delay(100);
     }
+
     CleanUp();
-    SDL_Quit();
 
     return 0;
 }

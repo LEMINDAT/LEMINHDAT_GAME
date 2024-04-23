@@ -12,13 +12,29 @@ const int SCREEN_HEIGHT = 600;
 const int CELL_SIZE = 20;
 const int STEP_SIZE = 1;
 
-enum KeyPress
+enum Direction
 {
-    DIR_UP,
-    DIR_DOWN,
-    DIR_LEFT,
-    DIR_RIGHT,
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
     DIR_TOTAL
+};
+
+enum FlipState
+{
+    NONE,
+    HORIZONTAL,
+    VERTICAL,
+    FLIP_TOTAL
+};
+
+enum ObjectType
+{
+    NORMAL,
+    FOOD,
+    RAT,
+    TYPE_TOTAL
 };
 
 const char cDIR[4] = {'U', 'D', 'L', 'R'};
@@ -30,7 +46,7 @@ static SDL_Renderer *renderer = NULL;
 static SDL_Event event;
 
 SDL_Texture* loadTexture(SDL_Renderer* renderer, const string& imagePath);
-void applyImage(SDL_Renderer* renderer, SDL_Texture* img, int Xpos, int Ypos, int WIDTH, int HEIGHT);
+void applyImage(SDL_Renderer* renderer, SDL_Texture* img, int Xpos, int Ypos, int WIDTH, int HEIGHT, double angle, int flip);
 void CleanUp();
 
 #endif // COMMONFUNCTION_H

@@ -45,6 +45,8 @@
 		<Unit filename="BaseObject.h" />
 		<Unit filename="CommonFunction.cpp" />
 		<Unit filename="CommonFunction.h" />
+		<Unit filename="Prey.cpp" />
+		<Unit filename="Prey.h" />
 		<Unit filename="Snake.cpp" />
 		<Unit filename="Snake.h" />
 		<Unit filename="main.cpp" />
