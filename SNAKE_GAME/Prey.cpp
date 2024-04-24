@@ -3,9 +3,6 @@
 Prey::Prey()
 {
     //ctor
-    for(int i = 0; i < MaxPrey; i ++){
-        RandomGenerate(i);
-    }
 }
 
 Prey::~Prey()
@@ -13,12 +10,21 @@ Prey::~Prey()
     //dtor
 }
 
-void Prey::RandomGenerate(int id){
+void Prey::Init(Map MAP){
+    for(int i = 0; i < MaxPrey; i ++){
+        RandomGenerate(i, MAP);
+    }
+}
+
+void Prey::RandomGenerate(int id, Map MAP){
     bool ok = false;
     while(!ok){
         ok = true;
         object[id].RandomGenerate();
         if(object[id].getTYPE() != NORMAL){
+            if(MAP.Stone[object[id].getX()/CELL_SIZE][object[id].getY()/CELL_SIZE]){
+                ok = false;
+            }
             for(int i = 0; i < MaxPrey; i++){
                 if( i != id && object[id] == object[i]){
                     ok = false;
@@ -51,13 +57,21 @@ bool Prey::LoadImages(SDL_Renderer* renderer){
     return true;
 }
 
-void Prey::Update(){
+void Prey::Update(Map MAP){
     for(int i = 0; i < MaxPrey; i++ ){
         if(object[i].getTYPE() != NORMAL){
             if(object[i].getTYPE() == RAT){
                 object[i].Move(CELL_SIZE, CELL_SIZE);
+                if(MAP.StoneCollision(object[i])){
+                    if(object[i].getDIR() <= DOWN){
+                        object[i].setDIR(UP + DOWN - object[i].getDIR());
+                    }
+                    else{
+                        object[i].setDIR(LEFT + RIGHT - object[i].getDIR());
+                    }
+                    object[i].Move(CELL_SIZE, CELL_SIZE);
+                }
             }
-
         }
         else{
             object[i].RandomGenerate();

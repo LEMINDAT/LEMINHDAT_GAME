@@ -25,7 +25,8 @@ void BaseObject::RandomGenerate()
     x = rand() % (SCREEN_WIDTH / CELL_SIZE) * CELL_SIZE;
     y = rand() % (SCREEN_HEIGHT / CELL_SIZE) * CELL_SIZE;
     DIR = rand() % DIR_TOTAL;
-    TYPE = rand() % TYPE_TOTAL;
+    TYPE = rand() % (TYPE_TOTAL*2) - TYPE_TOTAL;
+    if(TYPE<0) TYPE = NORMAL;
 }
 
 BaseObject BaseObject::operator = (const BaseObject& other){

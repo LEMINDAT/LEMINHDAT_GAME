@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1713899742 source:d:\snake_game\snake_game\main.cpp
+1713974528 source:d:\snake_game\snake_game\main.cpp
 	"CommonFunction.h"
+	"Map.h"
 	"BaseObject.h"
 	"Snake.h"
 
@@ -403,32 +404,41 @@
 	"begin_code.h"
 	"close_code.h"
 
-1713862379 source:d:\snake_game\snake_game\commonfunction.cpp
+1713933807 source:d:\snake_game\snake_game\commonfunction.cpp
 	"CommonFunction.h"
 
-1713811598 d:\snake_game\snake_game\commonfunction.h
+1713965432 d:\snake_game\snake_game\commonfunction.h
 	<SDL.h>
 	<SDL_image.h>
 	<bits/stdc++.h>
 
-1713894221 source:d:\snake_game\snake_game\baseobject.cpp
+1713967267 source:d:\snake_game\snake_game\baseobject.cpp
 	"BaseObject.h"
 
-1713894184 d:\snake_game\snake_game\baseobject.h
+1713967275 d:\snake_game\snake_game\baseobject.h
 	"CommonFunction.h"
 
-1713898529 source:d:\snake_game\snake_game\snake.cpp
+1713968112 source:d:\snake_game\snake_game\snake.cpp
 	"Snake.h"
 
-1713898241 d:\snake_game\snake_game\snake.h
+1713967958 d:\snake_game\snake_game\snake.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"Prey.h"
+	"Map.h"
 
-1713898745 source:d:\snake_game\snake_game\prey.cpp
+1713974835 source:d:\snake_game\snake_game\prey.cpp
 	"Prey.h"
 
-1713898355 d:\snake_game\snake_game\prey.h
+1713969088 d:\snake_game\snake_game\prey.h
 	"CommonFunction.h"
 	"BaseObject.h"
+	"Map.h"
+
+1713970862 d:\snake_game\snake_game\map.h
+	"CommonFunction.h"
+	"BaseObject.h"
+
+1713971437 source:d:\snake_game\snake_game\map.cpp
+	"Map.h"
 

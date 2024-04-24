@@ -4,15 +4,6 @@ Snake::Snake()
 {
     //ctor
 
-    BaseObject initHead, initTail;
-    initHead.RandomGenerate();
-    initHead.setTYPE(NORMAL);
-    initTail = initHead;
-    initTail.Move(CELL_SIZE*dx[initHead.getDIR()], CELL_SIZE*dy[initHead.getDIR()]);
-
-    segment.push_back(initHead);
-    segment.push_back(initTail);
-
     for(int i = 0; i < 12; i++){
         Head[i] = NULL;
     }
@@ -27,6 +18,22 @@ Snake::Snake()
 Snake::~Snake()
 {
     //dtor
+}
+
+void Snake::Init(Map MAP){
+
+    BaseObject initHead, initTail;
+
+    do{
+       initHead.RandomGenerate();
+    }while(MAP.StoneCollision(initHead));
+
+    initHead.setTYPE(NORMAL);
+    initTail = initHead;
+    initTail.Move(CELL_SIZE*dx[initHead.getDIR()], CELL_SIZE*dy[initHead.getDIR()]);
+
+    segment.push_back(initHead);
+    segment.push_back(initTail);
 }
 
 bool Snake::LoadImages(SDL_Renderer* renderer){
@@ -87,8 +94,12 @@ bool Snake::LoadImages(SDL_Renderer* renderer){
     return true;
 }
 
-bool Snake::CollideWithBody()
+bool Snake::CollideWithBodyOrStone(Map MAP)
 {
+    if(MAP.StoneCollision(segment.front())){
+        return true;
+    }
+
     for (int i = 1; i < segment.size(); ++i) {
         if (segment.front().SamePosition(segment[i])) {
             return true;

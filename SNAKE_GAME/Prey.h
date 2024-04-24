@@ -3,6 +3,7 @@
 
 #include "CommonFunction.h"
 #include "BaseObject.h"
+#include "Map.h"
 
 class Prey
 {
@@ -13,9 +14,10 @@ class Prey
         Prey();
         virtual ~Prey();
 
-        void RandomGenerate(int id);
+        void Init(Map MAP);
+        void RandomGenerate(int id, Map MAP);
         bool LoadImages(SDL_Renderer* renderer);
-        void Update();
+        void Update(Map MAP);
         void Draw(SDL_Renderer* renderer);
 
     protected:

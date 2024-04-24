@@ -10,7 +10,6 @@ using namespace std;
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 const int CELL_SIZE = 20;
-const int STEP_SIZE = 1;
 
 enum Direction
 {

@@ -4,6 +4,7 @@
 #include "CommonFunction.h"
 #include "BaseObject.h"
 #include "Prey.h"
+#include "Map.h"
 
 class Snake
 {
@@ -11,8 +12,9 @@ class Snake
         Snake();
         virtual ~Snake();
 
+        void Init(Map MAP);
         bool LoadImages(SDL_Renderer* renderer);
-        bool CollideWithBody();
+        bool CollideWithBodyOrStone(Map MAP);
         bool CollideWith(BaseObject object);
         bool OverlapWith(BaseObject object);
         bool OverlapWith(Prey preys);
@@ -20,10 +22,10 @@ class Snake
         void Popback();
         void Draw(SDL_Renderer* renderer, Prey preys);
         void HandleEvent(SDL_Event event);
+        deque<BaseObject> segment;
     protected:
 
     private:
-        deque<BaseObject> segment;
         SDL_Texture* Head[12];
         SDL_Texture* Body[6];
         SDL_Texture* Tail[4];

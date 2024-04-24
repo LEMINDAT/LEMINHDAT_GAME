@@ -1,11 +1,12 @@
 #include "CommonFunction.h"
+#include "Map.h"
 #include "BaseObject.h"
 #include "Snake.h"
 
-void update(Snake& snake, Prey& preys, SDL_Texture* BloodTexture, bool& GameOver) {
+void update(Snake& snake, Prey& preys, SDL_Texture* BloodTexture, bool& GameOver, Map MAP) {
 
     snake.Update();
-    preys.Update();
+    preys.Update(MAP);
 
     bool Collision = false;
     for(int i = 0; i < preys.MaxPrey; i++){
@@ -16,13 +17,14 @@ void update(Snake& snake, Prey& preys, SDL_Texture* BloodTexture, bool& GameOver
         if(snake.CollideWith(object)){
             Collision = true;
             if(object.getTYPE() == RAT){
-                int cWITDH = 60, cHEIGHT = 60;
+                int cWITDH = 60;
+                int cHEIGHT = 60;
                 applyImage(renderer, BloodTexture,
                            object.getX() - cWITDH/2, object.getY() - cHEIGHT/2,
                            CELL_SIZE + cWITDH, CELL_SIZE + cHEIGHT, 0, NONE);
             }
             do{
-                preys.RandomGenerate(i);
+                preys.RandomGenerate(i, MAP);
             }while(snake.OverlapWith(object));
             break;
         }
@@ -32,7 +34,7 @@ void update(Snake& snake, Prey& preys, SDL_Texture* BloodTexture, bool& GameOver
         snake.Popback();
     }
 
-    if(snake.CollideWithBody()) {
+    if(snake.CollideWithBodyOrStone(MAP)) {
         GameOver = true;
     }
 }
@@ -92,11 +94,18 @@ int main(int argc, char *argv[]) {
 
     Snake snake;
     Prey preys;
+    Map MAP;
+
+    snake.Init(MAP);
+    preys.Init(MAP);
 
     if(!snake.LoadImages(renderer)){
         return 1;
     }
     if(!preys.LoadImages(renderer)){
+        return 1;
+    }
+    if(!MAP.LoadImages(renderer)){
         return 1;
     }
 
@@ -118,9 +127,10 @@ int main(int argc, char *argv[]) {
         applyImage(renderer, backgroundTexture, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
 
         if(!GameOver){
-            update(snake, preys, BloodTexture, GameOver);
+            update(snake, preys, BloodTexture, GameOver, MAP);
         }
 
+        MAP.DrawStone(renderer);
         snake.Draw(renderer, preys);
         preys.Draw(renderer);
 
