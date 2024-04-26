@@ -4,7 +4,8 @@
   <img src = "https://github.com/LEMINDAT/SNAKE_GAME/blob/master/Icon.png" alt = "Snake Game">
 </p>
 
-Đây là một trò chơi em viết dựa trên tựa game cổ điển snake (rắn săn mồi). Game có cơ chế rất đơn giản, người chơi điều khiển một con rắn đi ăn mồi xuất hiện tại các điểm bất kỳ trên màn hình và né các chướng ngại vật (tường). Rắn sẽ dài ra mỗi khi ăn mồi. Trò chơi kết thúc khi rắn va vào thân mình hoặc vào tường. Ngoài loại mồi tĩnh, không di chuyển cổ điển, em phát triển thêm loại mồi có khả năng di chuyển để tăng sự phong phú cho game
+Đây là một trò chơi em viết dựa trên tựa game cổ điển snake (rắn săn mồi). Game có cơ chế rất đơn giản, người chơi điều khiển một con rắn đi ăn mồi xuất hiện tại các điểm bất kỳ trên màn hình và né các chướng ngại vật (tường). Rắn sẽ dài ra mỗi khi ăn mồi. Trò chơi kết thúc khi rắn va vào thân mình hoặc vào tường. Ngoài loại mồi tĩnh, không di chuyển cổ điển, em phát triển thêm loại mồi có khả năng di chuyển để tăng sự phong phú cho game.  
+[Demo Game](https://youtu.be/-A7YuPKA9Ws)
 ## Cách tải và chơi game
 * Người chơi có thể clone repo này về và bấm SNAKE_GAME.exe để chơi.
 * Sử dụng 4 phím UP, DOWN, LEFT, RIGHT để điều khiển đổi hướng của con rắn để ăn mồi và né tránh tường.
@@ -12,8 +13,8 @@
 ## Code
 * Code được em viết gần như toàn bộ có kết hợp với các kiến thức về SDL, thuật toán, kỹ thuật code tham khảo từ các nguồn trên mạng như Lazyfoo, Youtube, ChatGPT, ...
 * Code không sử dụng thuật toán gì đặc biệt, phức tạp, chỉ sử dụng những kĩ thuật cơ bản như duyệt để kiểm tra va chạm, sinh mồi ở các vị trí ngẫu nhiên, dùng deque để xử lí di chuyển của rắn, tạo hoạt ảnh cho đầu rắn khi đớp mồi và hoạt ảnh chạy cho mồi.
-## Hướng phát triển trong tương lai
-Trong tương lai, em có thể thêm các tính năng mới cho game như:
+## Hướng phát triển cho game
+Game vẫn còn có thể phát triển thêm các tính năng khác như:
 * Menu
 * Các Map khác nhau
 * Các chế độ chơi khác nhau
