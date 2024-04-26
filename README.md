@@ -1,3 +1,3 @@
 <p align = "center">
-*SNAKE GAME*
+*SNAKE GAME
 </p>
