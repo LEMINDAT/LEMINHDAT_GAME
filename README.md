@@ -1,7 +1,7 @@
 # SNAKE GAME - Lê Minh Đạt - MSSV: 23020037
 ## Giới thiệu về game
 <p align = "center">
-  <img src = "https://github.com/LEMINDAT/SNAKE_GAME/blob/master/poster.png" alt = "Snake Game">
+  <img src = "https://github.com/LEMINDAT/SNAKE_GAME/blob/master/Icon.png" alt = "Snake Game">
 </p>
 
 Đây là một trò chơi em viết dựa trên tựa game cổ điển snake (rắn săn mồi). Game có cơ chế rất đơn giản, người chơi điều khiển một con rắn đi ăn mồi xuất hiện tại các điểm bất kỳ trên màn hình và né các chướng ngại vật (tường). Rắn sẽ dài ra mỗi khi ăn mồi. Trò chơi kết thúc khi rắn va vào thân mình hoặc vào tường. Ngoài loại mồi tĩnh, không di chuyển cổ điển, em phát triển thêm loại mồi có khả năng di chuyển để tăng sự phong phú cho game
