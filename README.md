@@ -10,7 +10,8 @@
 * Sử dụng 4 phím UP, DOWN, LEFT, RIGHT để điều khiển đổi hướng của con rắn để ăn mồi và né tránh tường.
 * Ấn nút Close để thoát game.
 ## Code
-* Code được em viết gần như toàn bộ có kết hợp với các kiến thức về SDL, thuật toán, kỹ thuật code tham khảo từ các nguồn trên mạng như Lazyfoo, Youtube, ChatGPT, ... * Code không sử dụng thuật toán gì đặc biệt, phức tạp, chỉ sử dụng những kĩ thuật cơ bản như duyệt để kiểm tra va chạm, sinh mồi ở các vị trí ngẫu nhiên, dùng deque để xử lí di chuyển của rắn, tạo hoạt ảnh cho đầu rắn khi đớp mồi và hoạt ảnh chạy cho mồi.
+* Code được em viết gần như toàn bộ có kết hợp với các kiến thức về SDL, thuật toán, kỹ thuật code tham khảo từ các nguồn trên mạng như Lazyfoo, Youtube, ChatGPT, ...
+* Code không sử dụng thuật toán gì đặc biệt, phức tạp, chỉ sử dụng những kĩ thuật cơ bản như duyệt để kiểm tra va chạm, sinh mồi ở các vị trí ngẫu nhiên, dùng deque để xử lí di chuyển của rắn, tạo hoạt ảnh cho đầu rắn khi đớp mồi và hoạt ảnh chạy cho mồi.
 ## Hướng phát triển trong tương lai
 Trong tương lai, em có thể thêm các tính năng mới cho game như:
 * Menu
