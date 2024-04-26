@@ -442,3 +442,47 @@
 1713971437 source:d:\snake_game\snake_game\map.cpp
 	"Map.h"
 
+1714093521 source:d:\demo\snake_game\snake_game\baseobject.cpp
+	"BaseObject.h"
+
+1714093521 d:\demo\snake_game\snake_game\baseobject.h
+	"CommonFunction.h"
+
+1714093521 d:\demo\snake_game\snake_game\commonfunction.h
+	<SDL.h>
+	<SDL_image.h>
+	<bits/stdc++.h>
+
+1714093521 source:d:\demo\snake_game\snake_game\commonfunction.cpp
+	"CommonFunction.h"
+
+1714093521 source:d:\demo\snake_game\snake_game\main.cpp
+	"CommonFunction.h"
+	"Map.h"
+	"BaseObject.h"
+	"Snake.h"
+
+1714093521 d:\demo\snake_game\snake_game\map.h
+	"CommonFunction.h"
+	"BaseObject.h"
+
+1714093521 d:\demo\snake_game\snake_game\snake.h
+	"CommonFunction.h"
+	"BaseObject.h"
+	"Prey.h"
+	"Map.h"
+
+1714093521 d:\demo\snake_game\snake_game\prey.h
+	"CommonFunction.h"
+	"BaseObject.h"
+	"Map.h"
+
+1714093521 source:d:\demo\snake_game\snake_game\map.cpp
+	"Map.h"
+
+1714093521 source:d:\demo\snake_game\snake_game\prey.cpp
+	"Prey.h"
+
+1714093521 source:d:\demo\snake_game\snake_game\snake.cpp
+	"Snake.h"
+
