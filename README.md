@@ -7,10 +7,10 @@ Người chơi có thể clone repo này về và bấm SNAKE_GAME.exe để ch�
 Code được em viết gần như toàn bộ có kết hợp với các kiến thức về SDL, thuật toán, kỹ thuật code tham khảo từ các nguồn trên mạng như Lazyfoo, Youtube, ChatGPT, ... Code không sử dụng thuật toán gì đặc biệt, phức tạp, chỉ sử dụng những kĩ thuật cơ bản như duyệt để kiểm tra va chạm, sinh mồi ở các vị trí ngẫu nhiên, dùng deque để xử lí di chuyển của rắn, tạo hoạt ảnh cho đầu rắn khi đớp mồi và hoạt ảnh chạy cho mồi.
 ## Source
 Các hình ảnh trong game một số em tự vẽ, một số được lấy từ trên mạng:
-* [Ảnh Đá](https://www.freepik.com/free-vector/stones-rocks-cartoon_13050167.htm#query=cartoon%20stone&position=19&from_view=keyword&track=ais&uuid=8b40bf12-58a6-4d6b-8182-bf0d7f77c12d)
-* [Ảnh Background](https://pt.vecteezy.com/arte-vetorial/14572097-plano-de-fundo-do-desenho-de-desenho-animado-de-campo-de-grama-verde)
-* [Ảnh Mồi](https://clipart-library.com/clip-art/ham-transparent-20.htm)
-* [Ảnh Máu](https://www.pngitem.com/middle/mJxxRJ_blood-download-clip-art-cartoon-blood-splatter-png/)
+* ![Ảnh Đá](https://www.freepik.com/free-vector/stones-rocks-cartoon_13050167.htm#query=cartoon%20stone&position=19&from_view=keyword&track=ais&uuid=8b40bf12-58a6-4d6b-8182-bf0d7f77c12d)
+* ![Ảnh Background](https://pt.vecteezy.com/arte-vetorial/14572097-plano-de-fundo-do-desenho-de-desenho-animado-de-campo-de-grama-verde)
+* ![Ảnh Mồi](https://clipart-library.com/clip-art/ham-transparent-20.htm)
+* ![Ảnh Máu](https://www.pngitem.com/middle/mJxxRJ_blood-download-clip-art-cartoon-blood-splatter-png/)
 ## Kết luận
 Đây là lần đầu tiên em tạo ra một sản phẩm hoàn chỉnh từ lập trình. Game nhìn chung còn sơ sài, chưa được hoàn thiện và trong quá trình chơi vẫn còn phát sinh một số lỗi. Tuy vậy thì qua lần này em cũng rút ra cho bản thân được những bài học, những kiến thức thú vị và bổ ích trong lập trình, tạo thêm động lực để em tiếp tục học tập, rèn luyện để trau dồi kiến thức, cải thiện chuyên môn của bản thân.
 ## A Special Thanks To
