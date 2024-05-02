@@ -12,14 +12,14 @@ class Snake
         Snake();
         virtual ~Snake();
 
-        void Init(Map MAP);
+        void Init();
+        void Start();
         bool LoadImages(SDL_Renderer* renderer);
         bool CollideWithBodyOrStone(Map MAP);
         bool CollideWith(BaseObject object);
         bool OverlapWith(BaseObject object);
         bool OverlapWith(Prey preys);
         void Update();
-        void Popback();
         void Draw(SDL_Renderer* renderer, Prey preys);
         void HandleEvent(SDL_Event event);
         deque<BaseObject> segment;

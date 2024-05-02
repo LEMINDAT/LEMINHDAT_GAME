@@ -6,6 +6,10 @@
 class BaseObject
 {
     public:
+        int x, y;
+        int DIR;
+        int TYPE;
+
         BaseObject();
         virtual ~BaseObject();
 
@@ -13,21 +17,11 @@ class BaseObject
         bool SamePosition(const BaseObject& other) const;
         void RandomGenerate();
         BaseObject operator = (const BaseObject& other);
-        int getX();
-        int getY();
-        int getDIR();
-        int getTYPE();
-        void setX(int x_);
-        void setY(int y_);
-        void setDIR(int DIR_);
-        void setTYPE(int TYPE_);
         void Move(int Dx, int Dy);
+        void MoveThroughEdge(int Dx, int Dy);
         int ManhattanDist(const BaseObject& other) const;
 
     protected:
-        int x, y;
-        int DIR;
-        int TYPE;
 
     private:
 };

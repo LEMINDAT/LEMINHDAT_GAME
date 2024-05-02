@@ -3,19 +3,30 @@
 Map::Map()
 {
     //ctor
-    freopen("Map/Map.txt", "r", stdin);
-    for(int i = 0; i < SCREEN_HEIGHT/CELL_SIZE; i++){
-        for(int j = 0; j < SCREEN_WIDTH/CELL_SIZE; j++){
-            cin>>Stone[j][i];
-//            cerr<<Stone[j][i]<<' ';
-        }
-//        cerr<<'\n';
-    }
 }
 
 Map::~Map()
 {
     //dtor
+}
+
+void Map::setMap(int id){
+    imageSrc = "Map/Map";
+    imageSrc += char(id + '0');
+    imageSrc += ".txt";
+}
+
+void Map::LoadData(){
+    ifstream in;
+    in.open(imageSrc);
+    for(int i = 0; i < SCREEN_HEIGHT/CELL_SIZE; i++){
+        for(int j = 0; j < SCREEN_WIDTH/CELL_SIZE; j++){
+            in>>Stone[j][i];
+//            cerr<<Stone[j][i]<<' ';
+        }
+//        cerr<<'\n';
+    }
+    in.close();
 }
 
 bool Map::LoadImages(SDL_Renderer* renderer)
@@ -28,7 +39,7 @@ bool Map::LoadImages(SDL_Renderer* renderer)
 }
 
 bool Map::StoneCollision(BaseObject object){
-    if(Stone[object.getX()/CELL_SIZE][object.getY()/CELL_SIZE]){
+    if(Stone[object.x/CELL_SIZE][object.y/CELL_SIZE]){
         return true;
     }
     return false;

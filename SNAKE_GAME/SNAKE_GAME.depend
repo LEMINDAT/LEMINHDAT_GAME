@@ -442,10 +442,10 @@
 1713971437 source:d:\snake_game\snake_game\map.cpp
 	"Map.h"
 
-1714093521 source:d:\demo\snake_game\snake_game\baseobject.cpp
+1714396920 source:d:\demo\snake_game\snake_game\baseobject.cpp
 	"BaseObject.h"
 
-1714093521 d:\demo\snake_game\snake_game\baseobject.h
+1714396373 d:\demo\snake_game\snake_game\baseobject.h
 	"CommonFunction.h"
 
 1714093521 d:\demo\snake_game\snake_game\commonfunction.h
@@ -453,36 +453,80 @@
 	<SDL_image.h>
 	<bits/stdc++.h>
 
-1714093521 source:d:\demo\snake_game\snake_game\commonfunction.cpp
+1714396253 source:d:\demo\snake_game\snake_game\commonfunction.cpp
 	"CommonFunction.h"
 
-1714093521 source:d:\demo\snake_game\snake_game\main.cpp
+1714677473 source:d:\demo\snake_game\snake_game\main.cpp
 	"CommonFunction.h"
 	"Map.h"
 	"BaseObject.h"
 	"Snake.h"
 
-1714093521 d:\demo\snake_game\snake_game\map.h
+1714390958 d:\demo\snake_game\snake_game\map.h
 	"CommonFunction.h"
 	"BaseObject.h"
 
-1714093521 d:\demo\snake_game\snake_game\snake.h
+1714395736 d:\demo\snake_game\snake_game\snake.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"Prey.h"
 	"Map.h"
 
-1714093521 d:\demo\snake_game\snake_game\prey.h
+1714676886 d:\demo\snake_game\snake_game\prey.h
 	"CommonFunction.h"
 	"BaseObject.h"
 	"Map.h"
 
-1714093521 source:d:\demo\snake_game\snake_game\map.cpp
+1714391148 source:d:\demo\snake_game\snake_game\map.cpp
 	"Map.h"
 
-1714093521 source:d:\demo\snake_game\snake_game\prey.cpp
+1714673763 source:d:\demo\snake_game\snake_game\prey.cpp
 	"Prey.h"
 
-1714093521 source:d:\demo\snake_game\snake_game\snake.cpp
+1714397007 source:d:\demo\snake_game\snake_game\snake.cpp
+	"Snake.h"
+
+1714093521 source:d:\demo\snake_game1\snake_game\baseobject.cpp
+	"BaseObject.h"
+
+1714093521 d:\demo\snake_game1\snake_game\baseobject.h
+	"CommonFunction.h"
+
+1714093521 d:\demo\snake_game1\snake_game\commonfunction.h
+	<SDL.h>
+	<SDL_image.h>
+	<bits/stdc++.h>
+
+1714093521 source:d:\demo\snake_game1\snake_game\commonfunction.cpp
+	"CommonFunction.h"
+
+1714093521 source:d:\demo\snake_game1\snake_game\main.cpp
+	"CommonFunction.h"
+	"Map.h"
+	"BaseObject.h"
+	"Snake.h"
+
+1714093521 d:\demo\snake_game1\snake_game\map.h
+	"CommonFunction.h"
+	"BaseObject.h"
+
+1714093521 d:\demo\snake_game1\snake_game\snake.h
+	"CommonFunction.h"
+	"BaseObject.h"
+	"Prey.h"
+	"Map.h"
+
+1714093521 d:\demo\snake_game1\snake_game\prey.h
+	"CommonFunction.h"
+	"BaseObject.h"
+	"Map.h"
+
+1714093521 source:d:\demo\snake_game1\snake_game\map.cpp
+	"Map.h"
+
+1714093521 source:d:\demo\snake_game1\snake_game\prey.cpp
+	"Prey.h"
+
+1714093521 source:d:\demo\snake_game1\snake_game\snake.cpp
 	"Snake.h"
 

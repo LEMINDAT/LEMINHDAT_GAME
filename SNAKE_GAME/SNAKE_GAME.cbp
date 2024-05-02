@@ -47,7 +47,6 @@
 		<Unit filename="CommonFunction.h" />
 		<Unit filename="Map.cpp" />
 		<Unit filename="Map.h" />
-		<Unit filename="Map/Map.txt" />
 		<Unit filename="Prey.cpp" />
 		<Unit filename="Prey.h" />
 		<Unit filename="Snake.cpp" />

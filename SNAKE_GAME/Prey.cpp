@@ -21,9 +21,10 @@ void Prey::RandomGenerate(int id, Map MAP){
     while(!ok){
         ok = true;
         object[id].RandomGenerate();
-        if(object[id].getTYPE() != NORMAL){
-            if(MAP.Stone[object[id].getX()/CELL_SIZE][object[id].getY()/CELL_SIZE]){
+        if(object[id].TYPE != NORMAL){
+            if(MAP.Stone[object[id].x/CELL_SIZE][object[id].y/CELL_SIZE]){
                 ok = false;
+                continue;
             }
             for(int i = 0; i < MaxPrey; i++){
                 if( i != id && object[id] == object[i]){
@@ -59,49 +60,49 @@ bool Prey::LoadImages(SDL_Renderer* renderer){
 
 void Prey::Update(Map MAP){
     for(int i = 0; i < MaxPrey; i++ ){
-        if(object[i].getTYPE() != NORMAL){
-            if(object[i].getTYPE() == RAT){
-                object[i].Move(CELL_SIZE, CELL_SIZE);
+        if(object[i].TYPE != NORMAL){
+            if(object[i].TYPE == RAT){
+                object[i].MoveThroughEdge(CELL_SIZE, CELL_SIZE);
                 if(MAP.StoneCollision(object[i])){
-                    if(object[i].getDIR() <= DOWN){
-                        object[i].setDIR(UP + DOWN - object[i].getDIR());
+                    if(object[i].DIR <= DOWN){
+                        object[i].DIR = UP + DOWN - object[i].DIR;
                     }
                     else{
-                        object[i].setDIR(LEFT + RIGHT - object[i].getDIR());
+                        object[i].DIR = LEFT + RIGHT - object[i].DIR;
                     }
-                    object[i].Move(CELL_SIZE, CELL_SIZE);
+                    object[i].MoveThroughEdge(CELL_SIZE, CELL_SIZE);
                 }
             }
         }
         else{
-            object[i].RandomGenerate();
+            RandomGenerate(i, MAP);
         }
     }
 }
 
 void Prey::Draw(SDL_Renderer* renderer){
     for(int i =0; i<MaxPrey; i++){
-        if(object[i].getTYPE() == RAT){
-            int id = (object[i].getDIR() < 2 ? 0 : 2) + (object[i].getX() + object[i].getY())/CELL_SIZE%2;
+        if(object[i].TYPE == RAT){
+            int id = (object[i].DIR < 2 ? 0 : 2) + (object[i].x + object[i].y)/CELL_SIZE%2;
             int flip = NONE;
             int cWIDTH = (id < 2 ? 10 : 30);
             int cHEIGHT = (id < 2 ? 30 : 10);
 
-            if(object[i].getDIR() == DOWN){
+            if(object[i].DIR == DOWN){
                 flip = VERTICAL;
             }
 
-            if(object[i].getDIR() == RIGHT){
+            if(object[i].DIR == RIGHT){
                 flip = HORIZONTAL;
             }
 
-            applyImage(renderer, Rat[id], object[i].getX() - cWIDTH/2, object[i].getY() - cHEIGHT/2,
+            applyImage(renderer, Rat[id], object[i].x - cWIDTH/2, object[i].y - cHEIGHT/2,
                        CELL_SIZE + cWIDTH, CELL_SIZE + cHEIGHT, 0, flip);
         }
-        else if(object[i].getTYPE() == FOOD){
+        else if(object[i].TYPE == FOOD){
             int cWIDTH = 10;
             int cHEIGHT = 10;
-            applyImage(renderer, Food, object[i].getX() - cWIDTH/2, object[i].getY() - cHEIGHT/2,
+            applyImage(renderer, Food, object[i].x - cWIDTH/2, object[i].y - cHEIGHT/2,
                        CELL_SIZE + cWIDTH, CELL_SIZE + cHEIGHT, 0, NONE);
         }
     }

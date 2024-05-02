@@ -11,27 +11,33 @@ void update(Snake& snake, Prey& preys, SDL_Texture* BloodTexture, bool& GameOver
     bool Collision = false;
     for(int i = 0; i < preys.MaxPrey; i++){
         BaseObject& object = preys.object[i];
-        if(object.getTYPE() == NORMAL){
+        if(object.TYPE == NORMAL){
             continue;
         }
         if(snake.CollideWith(object)){
-            Collision = true;
-            if(object.getTYPE() == RAT){
-                int cWITDH = 60;
-                int cHEIGHT = 60;
-                applyImage(renderer, BloodTexture,
-                           object.getX() - cWITDH/2, object.getY() - cHEIGHT/2,
-                           CELL_SIZE + cWITDH, CELL_SIZE + cHEIGHT, 0, NONE);
+            if(!Collision){
+                Collision = true;
+                if(object.TYPE == RAT){
+                    int cWITDH = 60;
+                    int cHEIGHT = 60;
+                    applyImage(renderer, BloodTexture,
+                               object.x - cWITDH/2, object.y - cHEIGHT/2,
+                               CELL_SIZE + cWITDH, CELL_SIZE + cHEIGHT, 0, NONE);
+                }
+                do{
+                    preys.RandomGenerate(i, MAP);
+                }while(snake.OverlapWith(object));
             }
-            do{
+        }
+        else {
+            while(object.TYPE == FOOD && snake.OverlapWith(object)){
                 preys.RandomGenerate(i, MAP);
-            }while(snake.OverlapWith(object));
-            break;
+            }
         }
     }
 
     if(!Collision){
-        snake.Popback();
+        snake.segment.pop_back();
     }
 
     if(snake.CollideWithBodyOrStone(MAP)) {
@@ -95,8 +101,12 @@ int main(int argc, char *argv[]) {
     Snake snake;
     Prey preys;
     Map MAP;
+    MAP.setMap(1);
+    MAP.LoadData();
 
-    snake.Init(MAP);
+    snake.Init();
+    snake.Start();
+
     preys.Init(MAP);
 
     if(!snake.LoadImages(renderer)){
@@ -118,6 +128,10 @@ int main(int argc, char *argv[]) {
                 quit = true;
                 break;
             }
+            if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_END){
+                quit = true;
+                break;
+            }
             if(!GameOver){
                 snake.HandleEvent(event);
             }
@@ -127,7 +141,20 @@ int main(int argc, char *argv[]) {
         applyImage(renderer, backgroundTexture, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
 
         if(!GameOver){
+            int prv_size = snake.segment.size();
             update(snake, preys, BloodTexture, GameOver, MAP);
+            if(snake.segment.size() == 15 && snake.segment.size() > prv_size){
+                MAP.setMap(2);
+                MAP.LoadData();
+                snake.Start();
+                preys.Init(MAP);
+            }
+            else if(snake.segment.size() == 30 && snake.segment.size() > prv_size){
+                MAP.setMap(3);
+                MAP.LoadData();
+                snake.Start();
+                preys.Init(MAP);
+            }
         }
 
         MAP.DrawStone(renderer);

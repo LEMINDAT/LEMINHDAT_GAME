@@ -20,6 +20,7 @@ SDL_Texture* loadTexture(SDL_Renderer* renderer, const string& imagePath) {
 }
 
 void applyImage(SDL_Renderer* renderer, SDL_Texture* img, int Xpos, int Ypos, int WIDTH, int HEIGHT, double angle, int flip){
+
     SDL_Rect rect = {Xpos, Ypos, WIDTH, HEIGHT};
     SDL_RendererFlip flipState = (flip == NONE ? SDL_FLIP_NONE
                                   : (flip == HORIZONTAL ? SDL_FLIP_HORIZONTAL : SDL_FLIP_VERTICAL));

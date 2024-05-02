@@ -37,43 +37,14 @@ BaseObject BaseObject::operator = (const BaseObject& other){
     return *this;
 }
 
-int BaseObject::getX(){
-    return x;
-}
-
-int BaseObject::getY(){
-    return y;
-}
-
-int BaseObject::getDIR(){
-    return DIR;
-}
-
-int BaseObject::getTYPE(){
-    return TYPE;
-}
-
-void BaseObject::setX(int x_){
-    x = x_;
-}
-
-void BaseObject::setY(int y_){
-    y = y_;
-}
-
-void BaseObject::setDIR(int DIR_){
-    DIR = DIR_;
-}
-
-void BaseObject::setTYPE(int TYPE_){
-    TYPE = TYPE_;
-}
-
 void BaseObject::Move(int Dx, int Dy){
     x += dx[DIR] * Dx;
     y += dy[DIR] * Dy;
+}
 
-    //go through the edge
+void BaseObject::MoveThroughEdge(int Dx, int Dy){
+    Move(Dx, Dy);
+
     if(x >= SCREEN_WIDTH) x -= SCREEN_WIDTH;
     if(y >= SCREEN_HEIGHT) y -= SCREEN_HEIGHT;
 
